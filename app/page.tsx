@@ -1,6 +1,7 @@
 import { DualHero } from "@/components/hero/DualHero";
 import { DualEntryCards } from "@/components/hero/DualEntryCards";
 import { Differentiators } from "@/components/sections/Differentiators";
+import { OrderingChannels } from "@/components/sections/OrderingChannels";
 import { FareCalculatorSection } from "@/components/sections/FareCalculatorSection";
 import { CoverageStrip } from "@/components/sections/CoverageStrip";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <DualHero />
       <DualEntryCards />
       <Differentiators />
+      <OrderingChannels />
       <FareCalculatorSection />
       <CoverageStrip />
       <TestimonialsSection />

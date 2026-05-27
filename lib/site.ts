@@ -15,6 +15,9 @@ export const site = {
     process.env.NEXT_PUBLIC_PLAY_STORE_URL ??
     "https://play.google.com/store/apps/details?id=com.hualien.taxidriver",
   iosWaitlistUrl: process.env.NEXT_PUBLIC_IOS_WAITLIST_URL ?? "/ios-waitlist",
+  lineOAUrl:
+    process.env.NEXT_PUBLIC_LINE_OA_URL ?? "https://line.me/R/ti/p/@948rysbt",
+  lineOAId: "@948rysbt",
   gaId: process.env.NEXT_PUBLIC_GA_ID ?? "",
   locale: "zh-TW",
 } as const;

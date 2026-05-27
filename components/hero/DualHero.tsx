@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Star, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
+import { LineCTA } from "@/components/shared/LineCTA";
 import { BrandBadge } from "@/components/brand/BrandBadge";
 import { stats } from "@/lib/site";
 
@@ -42,8 +43,9 @@ export function DualHero() {
             ，長輩也會用。
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
             <PhoneCTA size="xl" hideNumberOnSmall={false} />
+            <LineCTA size="xl" label="加 LINE 叫車" showId />
             <Button asChild variant="outline" size="xl">
               <a href="#fare">看車資試算</a>
             </Button>

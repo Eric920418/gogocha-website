@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
+import { LineCTA } from "@/components/shared/LineCTA";
 import { FontSizeToggle } from "@/components/shared/FontSizeToggle";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +39,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <FontSizeToggle className="hidden md:inline-flex" />
+          <LineCTA className="hidden md:inline-flex" size="default" />
           <PhoneCTA
             className="hidden sm:inline-flex"
             size="default"
@@ -79,9 +81,12 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <div className="mt-2 flex items-center justify-between">
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <PhoneCTA size="default" />
+            <LineCTA size="default" />
+          </div>
+          <div className="mt-2 flex items-center justify-end">
             <FontSizeToggle />
-            <PhoneCTA size="sm" />
           </div>
         </nav>
       </div>

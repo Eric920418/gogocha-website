@@ -4,6 +4,7 @@ import { Section } from "@/components/layout/Section";
 import { BrandBadge } from "@/components/brand/BrandBadge";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
 import { ContactForm } from "./ContactForm";
+import { LineIcon } from "@/components/shared/LineIcon";
 import { Mail, Phone as PhoneIcon, Clock } from "lucide-react";
 import { site } from "@/lib/site";
 
@@ -21,21 +22,64 @@ const CHANNELS = [
     desc: "24h 不打烊・三秒撥通",
     value: site.phoneDisplay,
     href: `tel:${site.phone}`,
+    accent: "text-taxi-yellow-ink bg-taxi-yellow/30",
+  },
+  {
+    icon: LineIcon,
+    title: "LINE 叫車",
+    desc: "加好友、傳訊息、叫車",
+    value: site.lineOAId,
+    href: site.lineOAUrl,
+    external: true,
+    accent: "text-[#06C755] bg-[#06C755]/10",
   },
   {
     icon: Mail,
     title: "B2B 合作",
     desc: "旅行社・飯店・企業",
-    value: "business@gogocha.tw",
-    href: "mailto:business@gogocha.tw",
+    value: "business@hualientaxi.taxi",
+    href: "mailto:business@hualientaxi.taxi",
+    accent: "text-trust-blue-dark bg-trust-blue/10",
   },
   {
     icon: Clock,
     title: "客服時間",
     desc: "電話叫車服務時間",
-    value: "24 小時全年無休",
+    value: "24h 全年無休",
+    accent: "text-ink-700 bg-sand-100",
   },
 ];
+
+type ChannelInnerProps = {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  value: string;
+  desc: string;
+  accent: string;
+};
+
+function ChannelInner({
+  icon: Icon,
+  title,
+  value,
+  desc,
+  accent,
+}: ChannelInnerProps) {
+  return (
+    <div className="flex items-start gap-3">
+      <div
+        className={`size-11 rounded-xl grid place-items-center shrink-0 ${accent}`}
+      >
+        <Icon className="size-5" />
+      </div>
+      <div>
+        <p className="text-sm text-ink-500">{title}</p>
+        <p className="font-black text-ink-900 text-lg mt-0.5">{value}</p>
+        <p className="text-xs text-ink-500 mt-1">{desc}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function ContactPage() {
   return (
@@ -57,32 +101,28 @@ export default function ContactPage() {
       </Section>
 
       <Section className="bg-sand-100 pt-8 md:pt-12">
-        <div className="grid lg:grid-cols-3 gap-5 mb-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {CHANNELS.map((c) => {
-            const Icon = c.icon;
-            const Wrap = c.href ? "a" : "div";
-            return (
-              <Wrap
+            const isAnchor = "href" in c && c.href;
+            const isExternal = "external" in c && c.external;
+            return isAnchor ? (
+              <a
                 key={c.title}
-                {...(c.href ? { href: c.href } : {})}
-                className="block bg-white rounded-2xl border border-sand-200 p-5 md:p-6 hover:-translate-y-0.5 hover:shadow-md transition-all"
+                href={c.href}
+                {...(isExternal
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="block bg-white rounded-2xl border border-sand-200 p-5 hover:-translate-y-0.5 hover:shadow-md transition-all"
               >
-                <div className="flex items-start gap-3">
-                  <div className="size-11 rounded-xl bg-trust-blue/10 grid place-items-center shrink-0">
-                    <Icon
-                      className="size-5 text-trust-blue-dark"
-                      aria-hidden
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-ink-500">{c.title}</p>
-                    <p className="font-black text-ink-900 text-lg mt-0.5">
-                      {c.value}
-                    </p>
-                    <p className="text-xs text-ink-500 mt-1">{c.desc}</p>
-                  </div>
-                </div>
-              </Wrap>
+                <ChannelInner {...c} />
+              </a>
+            ) : (
+              <div
+                key={c.title}
+                className="block bg-white rounded-2xl border border-sand-200 p-5"
+              >
+                <ChannelInner {...c} />
+              </div>
             );
           })}
         </div>
@@ -98,8 +138,19 @@ export default function ContactPage() {
         </Suspense>
 
         <div className="mt-8 text-center">
-          <p className="text-sm text-ink-500 mb-3">急著叫車？直接撥打：</p>
-          <PhoneCTA size="lg" />
+          <p className="text-sm text-ink-500 mb-3">急著叫車？</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <PhoneCTA size="lg" />
+            <a
+              href={site.lineOAUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 h-14 px-8 text-lg rounded-xl bg-[#06C755] text-white font-bold hover:bg-[#05B14C] transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5"
+            >
+              <LineIcon className="size-5" />
+              加 LINE {site.lineOAId}
+            </a>
+          </div>
         </div>
       </Section>
     </>

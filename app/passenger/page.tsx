@@ -3,6 +3,7 @@ import { Section } from "@/components/layout/Section";
 import { Card, CardContent } from "@/components/ui/card";
 import { BrandBadge } from "@/components/brand/BrandBadge";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
+import { LineCTA } from "@/components/shared/LineCTA";
 import { AppDownloadCTA } from "@/components/shared/AppDownloadCTA";
 import { Testimonial } from "@/components/shared/Testimonial";
 import { testimonials } from "@/content/testimonials";
@@ -71,8 +72,9 @@ export default function PassengerPage() {
           <p className="mt-5 text-lg md:text-xl text-ink-700 leading-relaxed">
             無論是長輩看診、上班通勤、機場接送，還是夜歸回家。GoGoCha 24 小時在地車隊三秒撥通。
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
             <PhoneCTA size="xl" />
+            <LineCTA size="xl" label="加 LINE 叫車" showId />
           </div>
           <div className="mt-6">
             <p className="text-sm text-ink-500 mb-3">或下載 App 自助叫車</p>

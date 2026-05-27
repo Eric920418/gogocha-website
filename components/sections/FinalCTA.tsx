@@ -1,5 +1,6 @@
 import { Section } from "@/components/layout/Section";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
+import { LineCTA } from "@/components/shared/LineCTA";
 import { AppDownloadCTA } from "@/components/shared/AppDownloadCTA";
 
 export function FinalCTA() {
@@ -10,13 +11,16 @@ export function FinalCTA() {
           現在就叫一台車
         </h2>
         <p className="mt-5 text-lg md:text-xl text-ink-700">
-          無論是上班、看診、回家、接機，撥一通電話或下載 App，
+          無論上班、看診、回家、接機，選最順手的方式，
           <br className="hidden md:block" />
           花蓮在地司機三秒撥通。
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-6">
-          <PhoneCTA size="xl" />
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <PhoneCTA size="xl" />
+            <LineCTA size="xl" label="加 LINE 叫車" showId />
+          </div>
           <div className="flex items-center gap-3 text-sm text-ink-500">
             <span className="h-px w-12 bg-sand-200" aria-hidden />
             或下載 App

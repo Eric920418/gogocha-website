@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { LineIcon } from "@/components/shared/LineIcon";
+import { Phone as PhoneIcon } from "lucide-react";
 import { site } from "@/lib/site";
 
 const COLUMNS = [
@@ -47,12 +49,24 @@ export function SiteFooter() {
             <p className="mt-4 text-sm text-sand-200 leading-relaxed">
               花蓮在地 24 小時計程車隊。透明跳表、長輩友善、AI 智慧派車。
             </p>
-            <a
-              href={`tel:${site.phone}`}
-              className="mt-4 inline-block text-2xl font-black text-taxi-yellow tabular-nums hover:text-taxi-yellow-dark transition-colors"
-            >
-              {site.phoneDisplay}
-            </a>
+            <div className="mt-5 flex flex-col gap-2">
+              <a
+                href={`tel:${site.phone}`}
+                className="inline-flex items-center gap-2 text-xl font-black text-taxi-yellow tabular-nums hover:text-taxi-yellow-dark transition-colors"
+              >
+                <PhoneIcon className="size-5" aria-hidden />
+                {site.phoneDisplay}
+              </a>
+              <a
+                href={site.lineOAUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-base font-bold text-[#06C755] hover:text-[#5DCE7C] transition-colors"
+              >
+                <LineIcon className="size-5" />
+                LINE {site.lineOAId}
+              </a>
+            </div>
           </div>
 
           {COLUMNS.map((col) => (

@@ -8,7 +8,7 @@ export function buildOrganizationJsonLd() {
     url: site.url,
     logo: `${site.url}/logo.png`,
     telephone: site.phone,
-    sameAs: [],
+    sameAs: [site.lineOAUrl],
   };
 }
 
@@ -34,6 +34,24 @@ export function buildTaxiServiceJsonLd() {
       "@type": "Organization",
       name: site.name,
     },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: site.phone,
+        contactType: "customer service",
+        areaServed: "TW",
+        availableLanguage: ["zh-TW"],
+        hoursAvailable: "Mo-Su 00:00-23:59",
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "reservations",
+        url: site.lineOAUrl,
+        identifier: `LINE ${site.lineOAId}`,
+        areaServed: "TW",
+        availableLanguage: ["zh-TW"],
+      },
+    ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: stats.rating,
