@@ -5,6 +5,7 @@ import { BrandBadge } from "@/components/brand/BrandBadge";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
 import { ContactForm } from "./ContactForm";
 import { LineIcon } from "@/components/shared/LineIcon";
+import { LineQR } from "@/components/shared/LineQR";
 import { Mail, Phone as PhoneIcon, Clock } from "lucide-react";
 import { site } from "@/lib/site";
 
@@ -125,6 +126,35 @@ export default function ContactPage() {
               </div>
             );
           })}
+        </div>
+
+        {/* LINE 叫車快速通道（含 QR） */}
+        <div className="mb-10 rounded-2xl bg-gradient-to-br from-[#06C755] to-[#05B14C] text-white p-6 md:p-10">
+          <div className="grid md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-center">
+            <LineQR size={180} showId={false} className="bg-white border-0 mx-auto md:mx-0" />
+            <div className="text-center md:text-left">
+              <div className="inline-flex items-center gap-2 text-xs font-bold bg-white/15 rounded-full px-3 py-1 mb-3">
+                <LineIcon className="size-4" />
+                推薦給長輩
+              </div>
+              <h2 className="text-2xl md:text-4xl font-black leading-tight">
+                LINE 叫車最方便
+              </h2>
+              <p className="mt-3 text-base md:text-lg text-white/90 leading-relaxed">
+                加入官方帳號 <span className="font-black tabular-nums">{site.lineOAId}</span>
+                ，直接傳訊息就能叫車、查車資、問路線。手機 LINE App 掃左邊 QR 立刻加好友。
+              </p>
+              <a
+                href={site.lineOAUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-white text-[#06C755] font-black hover:bg-white/90 transition-all"
+              >
+                <LineIcon className="size-5" />
+                直接開啟 LINE 加入
+              </a>
+            </div>
+          </div>
         </div>
 
         <Suspense

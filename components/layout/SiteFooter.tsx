@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { LineIcon } from "@/components/shared/LineIcon";
@@ -86,6 +87,30 @@ export function SiteFooter() {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* QR code — 桌機顯示，給「看到網站想加 LINE」的使用者掃 */}
+        <div className="hidden md:flex mt-10 pt-8 border-t border-ink-700 items-center gap-5">
+          <div className="rounded-xl bg-white p-2 shadow-sm">
+            <Image
+              src="/line-qr.png"
+              alt={`掃描加入 LINE 官方帳號 ${site.lineOAId}`}
+              width={108}
+              height={108}
+              className="rounded-md"
+            />
+          </div>
+          <div>
+            <p className="text-xs text-sand-200 uppercase tracking-widest mb-1">
+              掃 QR 加 LINE 好友
+            </p>
+            <p className="text-2xl font-black text-[#06C755] tabular-nums">
+              {site.lineOAId}
+            </p>
+            <p className="text-xs text-sand-200 mt-1">
+              手機用 LINE App 掃描即可加入官方帳號
+            </p>
+          </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-ink-700 flex flex-col md:flex-row justify-between gap-4 text-xs text-sand-200">
