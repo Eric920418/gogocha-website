@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
+@theme {
+  /* === Brand Colors（來自 Android App Color.kt）=== */
+  --color-taxi-yellow: #FFD54F;
+  --color-taxi-yellow-dark: #FFC107;
+  --color-taxi-yellow-ink: #1F1B0A;
+  --color-trust-blue: #1976D2;
+  --color-trust-blue-dark: #1565C0;
+
+  /* === Warm Neutrals（溫暖在地感）=== */
+  --color-sand-50: #FBF8F3;
+  --color-sand-100: #F5EFE4;
+  --color-sand-200: #E8DCC5;
+  --color-ink-900: #1A1814;
+  --color-ink-700: #4A4438;
+  --color-ink-500: #7A7060;
+
+  /* === Semantic === */
+  --color-success: #2E7D32;
+  --color-danger: #C62828;
+
+  /* === Typography Scale（長輩友善，base 18px）=== */
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3rem;
+  --text-5xl: 3.75rem;
+  --text-6xl: 5rem;
+  --text-7xl: 6.5rem;
+
+  /* === Fonts === */
+  --font-sans: var(--font-noto-sans-tc), system-ui, -apple-system, sans-serif;
+
+  /* === Animation === */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* === Root === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --fs-scale: 1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: calc(16px * var(--fs-scale));
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-sand-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* === Tabular numbers for fare display === */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* === Focus Ring（trust-blue 加粗 3px，長輩友善）=== */
+*:focus-visible {
+  outline: 3px solid var(--color-trust-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* === 動畫尊重 prefers-reduced-motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === 字體選取色 === */
+::selection {
+  background: var(--color-taxi-yellow);
+  color: var(--color-taxi-yellow-ink);
 }
