@@ -13,6 +13,7 @@ const NAV = [
   { href: "/passenger", label: "我要叫車" },
   { href: "/driver", label: "司機招募" },
   { href: "/pricing", label: "透明車資" },
+  { href: "/faq", label: "常見問題" },
   { href: "/contact", label: "聯絡我們" },
 ] as const;
 

@@ -5,7 +5,10 @@ import { site } from "@/lib/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildOrganizationJsonLd, buildTaxiServiceJsonLd } from "@/lib/seo/jsonld";
+import {
+  buildOrganizationJsonLd,
+  buildLocalBusinessJsonLd,
+} from "@/lib/seo/jsonld";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -34,14 +37,8 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `花蓮計程車叫車推薦｜${site.shortName} 在地24h車隊`,
     description: site.description,
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: site.name,
-      },
-    ],
+    // og:image 由 app/opengraph-image.tsx 動態產生（Next 自動注入正確 URL），
+    // 不再手動指向不存在的 /og-image.png
   },
   twitter: {
     card: "summary_large_image",
@@ -77,7 +74,7 @@ export default function RootLayout({
     >
       <body className="bg-sand-50 text-ink-900 min-h-full flex flex-col">
         <JsonLd data={buildOrganizationJsonLd()} />
-        <JsonLd data={buildTaxiServiceJsonLd()} />
+        <JsonLd data={buildLocalBusinessJsonLd()} />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

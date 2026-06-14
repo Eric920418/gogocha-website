@@ -1,34 +1,10 @@
 import { Section } from "@/components/layout/Section";
 import { MapPin } from "lucide-react";
+import { serviceArea } from "@/lib/site";
 
-const TOWNS = [
-  "花蓮市",
-  "吉安鄉",
-  "新城鄉",
-  "壽豐鄉",
-  "鳳林鎮",
-  "光復鄉",
-  "瑞穗鄉",
-  "玉里鎮",
-  "秀林鄉",
-  "萬榮鄉",
-  "卓溪鄉",
-  "豐濱鄉",
-  "富里鄉",
-];
-
-const LANDMARKS = [
-  "花蓮機場",
-  "花蓮火車站",
-  "太魯閣國家公園",
-  "七星潭",
-  "清水斷崖",
-  "慶修院",
-  "東大門夜市",
-  "瑞穗牧場",
-  "光復糖廠",
-  "六十石山",
-];
+// 服務區域改用 lib/site.ts 的單一資料源，與 JSON-LD areaServed、路線頁、llms.txt 共用
+const TOWNS = serviceArea.towns;
+const LANDMARKS = serviceArea.landmarks;
 
 export function CoverageStrip() {
   return (

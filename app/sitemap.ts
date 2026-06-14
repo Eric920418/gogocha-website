@@ -6,6 +6,9 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/passenger", priority: 0.9, changeFrequency: "monthly" },
   { path: "/driver", priority: 0.9, changeFrequency: "monthly" },
   { path: "/pricing", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/routes", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/faq", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/about", priority: 0.7, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
 ];

@@ -12,6 +12,7 @@ const COLUMNS = [
       { href: "/passenger", label: "乘客叫車" },
       { href: "/driver", label: "司機招募" },
       { href: "/pricing", label: "透明車資" },
+      { href: "/routes", label: "熱門路線車資" },
       { href: "/contact?type=business", label: "B2B 合作" },
     ],
   },
@@ -19,16 +20,14 @@ const COLUMNS = [
     title: "關於",
     links: [
       { href: "/about", label: "關於我們" },
-      { href: "/coverage", label: "服務區域" },
+      { href: "/faq", label: "常見問題" },
       { href: "/contact", label: "聯絡我們" },
     ],
   },
   {
+    // /terms 服務條款頁尚未建立，補上前先不放死連結（見 README 待辦）
     title: "法律",
-    links: [
-      { href: "/privacy", label: "隱私政策" },
-      { href: "/terms", label: "服務條款" },
-    ],
+    links: [{ href: "/privacy", label: "隱私政策" }],
   },
 ] as const;
 

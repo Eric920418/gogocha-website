@@ -33,18 +33,21 @@
 3. **真實 API 串接** — 車資試算器直接打 `https://api.hualientaxi.taxi/api/config/fare/calculate`
 4. **API 失敗 fallback** — 切換到本地計算邏輯（對齊 Android `FareCalculator.kt`）
 
-## 頁面結構（P0 = 6 頁）
+## 頁面結構（9 頁）
 
 | 路徑 | 內容 | 關鍵元件 |
 |------|------|----------|
 | `/` | 主導向 hero + 三大差異化 + 車資試算器 + 服務區域 + 評價 + B2B + 司機招募 + 終 CTA | DualHero, FareCalculator, B2BSection |
 | `/passenger` | 乘客專區 + 下載 App + 評價 | AppDownloadCTA, Testimonial |
 | `/driver` | 司機招募 + 收入試算器 + 申請表單 | IncomeCalculator, DriverApplyForm |
-| `/pricing` | 完整費率表 + 車資試算器 + FAQ | FareCalculator, FareTable |
+| `/pricing` | 完整費率表 + 車資試算器 + 車資 FAQ（FAQPage） | FareCalculator, FareTable |
+| `/routes` | 熱門路線車資與車程指南（AEO/GEO 重點，車資由 fare 邏輯衍生） | FaqList, `content/routes.ts` |
+| `/faq` | 常見問題（25 題 6 類，FAQPage，原生 `<details>`） | FaqList, `content/faqs.ts` |
+| `/about` | 關於我們・在地故事（E-E-A-T） | — |
 | `/contact` | 聯絡表單（通用 / B2B / 客訴） | ContactForm |
 | `/privacy` | 隱私政策 | — |
 
-P1（上線後補）：`/business`、`/coverage`、`/about`、`/terms`、`/ios-waitlist`
+P1（上線後補）：`/terms`（服務條款，補上前 footer 暫不放連結）、`/ios-waitlist`
 
 ## 開發
 
@@ -147,22 +150,25 @@ git push -u origin main
 把 `.env.local` 內容複製到 Vercel Project Settings → Environment Variables，**Production / Preview / Development** 三個都設定。
 
 **重要**：
-- `NEXT_PUBLIC_SITE_URL` 改為正式網址（如 `https://gogocha.tw`）
+- `NEXT_PUBLIC_SITE_URL` **必須**設為正式網址 `https://hualientaxi.taxi`（影響 canonical / sitemap / JSON-LD / llms.txt 全部 URL）。未設時用 `lib/site.ts` 的 fallback（已是 hualientaxi.taxi）；本地 `.env.local` 的 `http://localhost:3000` 僅供開發，**勿帶到 production**。
 - `RESEND_API_KEY` 必須設定（否則 API 在 production 會回 503）
 - `RESEND_FROM_DOMAIN` 必須在 Resend 完成 DNS 驗證
 
 ### 4. 自訂網域
 
-在 Vercel Settings → Domains 加入 `gogocha.tw`，按指示設定 DNS。
+在 Vercel Settings → Domains 加入 `hualientaxi.taxi`，按指示設定 DNS。`next.config.ts` 已設 `www → apex` 301 重導。
 
 ## 驗證清單（上線前）
 
-### 內容
-- [ ] 真實品牌數據填入 `lib/site.ts` 的 `stats`
-- [ ] 真實電話號碼填入環境變數
-- [ ] AI 插畫生成並放到 `public/illustrations/`（風格 brief 見 plan file）
+### 內容（待替換真實素材 — 目前皆佔位）
+- [ ] 真實品牌數據填入 `lib/site.ts` 的 `stats`（4.9 / 120 等目前是佔位，UI StatPill 仍會顯示）
+- [ ] 真實電話填入環境變數 `NEXT_PUBLIC_PHONE`（佔位 `+886900000000` 時，JSON-LD 與 llms.txt 會自動省略電話、只留 LINE）
+- [ ] `/about` 創辦故事、司機團隊照片 / 人數 / 年資（搜尋程式碼裡的 `TODO` 註解）
+- [ ] 補 `public/og-image.png`（1200×630；schema `image` 目前暫指 `/logo.png`）與 `favicon.ico` / `apple-touch-icon.png`（layout 已引用但檔案缺）
+- [ ] 真實第三方評價到位後，才可在 schema 加回 `aggregateRating`（自家網站自評會違反 Google 政策）
+- [ ] AI 插畫生成並放到 `public/illustrations/`
 - [ ] iOS waitlist 頁面建立（`/ios-waitlist`）或改用真實 App Store URL
-- [ ] 隱私政策請律師審核
+- [ ] 隱私政策請律師審核；補 `/terms` 服務條款頁後在 footer 加回連結
 
 ### 技術
 - [ ] `pnpm exec tsc --noEmit` 無錯誤
@@ -172,11 +178,14 @@ git push -u origin main
 - [ ] Lighthouse Mobile：Performance ≥ 90、Accessibility ≥ 95、SEO 100
 - [ ] iPhone SE 實機測試對比度、按鈕點擊精準度
 
-### SEO
-- [ ] `/sitemap.xml` 內容正確
-- [ ] `/robots.txt` 內容正確
+### SEO / GEO / AEO
+- [ ] `/sitemap.xml` 含 9 頁、URL 為正式網域（非 localhost）
+- [ ] `/robots.txt`、`/llms.txt` 內容正確、URL 為正式網域
 - [ ] OG image 在 [opengraph.xyz](https://opengraph.xyz) 預覽正確
-- [ ] 首頁 / pricing 含 `TaxiService` JSON-LD
+- [ ] 首頁含 `LocalBusiness`/`TaxiService` + `Organization` JSON-LD（[validator.schema.org](https://validator.schema.org)）
+- [ ] `/faq`、`/routes`、`/pricing` 含 `FAQPage`；各子頁含 `BreadcrumbList`
+- [ ] JSON-LD 無 `aggregateRating`、無假電話（真實資料到位前不放）
+- [ ] Rich Results Test：LocalBusiness / Breadcrumb 可偵測；**FAQ 顯示「無富摘要資格」屬正常**（Google 已將 FAQ 富摘要限縮至權威網站；FAQPage 價值在 AI 引擎擷取）
 - [ ] Google Search Console 提交 sitemap
 
 ## 檔案結構
@@ -189,9 +198,13 @@ gogocha-website/
 │   ├── page.tsx             # 首頁
 │   ├── passenger/page.tsx
 │   ├── driver/page.tsx
-│   ├── pricing/page.tsx
+│   ├── pricing/page.tsx     # 含車資 FAQ（FAQPage）
+│   ├── routes/page.tsx      # 熱門路線車資（AEO/GEO）
+│   ├── faq/page.tsx         # 常見問題（FAQPage）
+│   ├── about/page.tsx       # 關於我們（E-E-A-T）
 │   ├── contact/page.tsx + ContactForm.tsx
 │   ├── privacy/page.tsx
+│   ├── llms.txt/route.ts    # GEO：給 AI 引擎的純文字導覽
 │   ├── api/
 │   │   ├── contact/route.ts
 │   │   └── driver-apply/route.ts
@@ -205,16 +218,36 @@ gogocha-website/
 │   ├── driver/              # IncomeCalculator, DriverApplyForm
 │   ├── sections/            # 首頁區塊 components
 │   ├── seo/                 # JsonLd
-│   └── shared/              # PhoneCTA, AppDownloadCTA, FontSizeToggle, StatPill, Testimonial
+│   └── shared/              # PhoneCTA, LineCTA, FaqList, FontSizeToggle, StatPill, Testimonial
 ├── lib/
 │   ├── api/                 # fare.ts, schemas.ts
-│   ├── seo/                 # jsonld.ts
-│   ├── site.ts              # 全站設定 + stats
+│   ├── seo/                 # jsonld.ts（Organization/LocalBusiness/Breadcrumb/FAQPage builders）
+│   ├── site.ts              # 全站設定 + stats + serviceArea（13 鄉鎮單一資料源）
 │   ├── fonts.ts             # next/font 配置
 │   └── utils.ts             # cn, formatCurrency
-├── content/                 # testimonials.ts
+├── content/                 # testimonials.ts, faqs.ts, routes.ts
 └── public/                  # logo, splash-hero, illustrations/, screenshots/
 ```
+
+## SEO / GEO / AEO 架構
+
+2026-06 強化。策略：技術 SEO 已完備，重點放在「可被 AI 答案引擎擷取的在地事實內容」。
+
+**結構化資料**（`lib/seo/jsonld.ts`，用 `<JsonLd>` 注入）：
+- `Organization` + `LocalBusiness`（`@type` 同時掛 `TaxiService`）：全站 layout 注入。
+- 計程車是 SAB（service-area business）：**不放街道地址**，用 `areaServed`（13 鄉鎮，取自 `site.ts` 的 `serviceArea`）+ 行政區級 `PostalAddress` + `geo` 中心點。
+- **無 `aggregateRating`**：自家網站對自己評分會違反 Google 政策；真實第三方評價到位前不放。
+- 電話佔位守衛 `isPlaceholderPhone()`：假號碼時 schema 與 llms.txt 自動省略電話、只留 LINE，真值一進環境變數即放行。
+- `FAQPage`：`/faq`（全 25 題）、`/pricing`（車資子集）、`/routes`（OD 子集）。schema 內容＝該頁實際可見內容。**價值在 AEO/GEO**（ChatGPT / Perplexity / AI Overviews 擷取問答），非 Google FAQ 富摘要（已限縮至權威網站，一般商家頁不會長出折疊富摘要，屬正常）。
+- `BreadcrumbList`：各子頁，`buildBreadcrumbJsonLd([{ name, path }])`。
+
+**內容單一資料源**（UI 與 schema 共用，杜絕不同步）：
+- `content/faqs.ts`：FAQ 題庫（欄位 `question` / `answer` 直接對齊 `buildFAQJsonLd`）。
+- `content/routes.ts`：路線資料。車資**不寫死**，由 `estimateDayFare()` 經 `calculateFareLocally` + 固定中午時間衍生（費率改了自動同步，且避免 build 落在夜間誤加 20%）；車程 `estMinutes` 為在地常識手填。
+
+**GEO**：`app/llms.txt/route.ts` 動態產生（URL 從 `site.url` 衍生），給 AI 引擎結構化導覽。
+
+**折疊 UI**：`/faq`、`/routes` 用原生 `<details>`（`components/shared/FaqList.tsx`）——零 JS、內容即刻可被爬蟲擷取、原生無障礙，最符合長輩友善與 GEO。
 
 ## 與 Android App 的關聯
 
@@ -231,3 +264,5 @@ gogocha-website/
 3. **後端 API 修改時**：同步檢查 `lib/api/schemas.ts` 的 Zod schema 是否仍符合 envelope 格式
 4. **品牌統計更新**：直接改 `lib/site.ts` 的 `stats` 常數
 5. **新增頁面**：記得同步加到 `app/sitemap.ts` 的 ROUTES 與 `SiteHeader.tsx` 的 NAV / `SiteFooter.tsx` 的 COLUMNS
+6. **改 FAQ / 路線內容**：改 `content/faqs.ts` / `content/routes.ts`（UI 與 JSON-LD 共用同一份）；服務區域 13 鄉鎮改 `lib/site.ts` 的 `serviceArea`
+7. **改費率**：改 `lib/api/fare.ts` 的 `FALLBACK_FARE_CONFIG`，`/routes` 估算車資自動跟著變（**勿在 `content/routes.ts` 寫死車資**）
