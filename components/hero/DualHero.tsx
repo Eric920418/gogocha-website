@@ -44,7 +44,7 @@ export function DualHero() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
-            <PhoneCTA size="xl" hideNumberOnSmall={false} />
+            <PhoneCTA size="xl" />
             <LineCTA size="xl" label="加 LINE 叫車" showId />
             <Button asChild variant="outline" size="xl">
               <a href="#fare">看車資試算</a>

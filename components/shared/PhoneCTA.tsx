@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 
 interface PhoneCTAProps extends Omit<ButtonProps, "asChild" | "children"> {
   label?: string;
-  hideNumberOnSmall?: boolean;
+  /** Tailwind classes控制電話號碼的顯示時機，例如 "hidden xl:inline"。預設一律顯示。 */
+  numberClassName?: string;
 }
 
 export function PhoneCTA({
@@ -13,7 +14,7 @@ export function PhoneCTA({
   className,
   variant = "primary",
   size = "default",
-  hideNumberOnSmall = false,
+  numberClassName,
   ...props
 }: PhoneCTAProps) {
   return (
@@ -28,12 +29,7 @@ export function PhoneCTA({
         <Phone className="size-5" aria-hidden />
         <span className="flex flex-col items-start leading-tight">
           <span className="text-xs font-medium opacity-80">{label}</span>
-          <span
-            className={cn(
-              "font-black",
-              hideNumberOnSmall && "hidden sm:inline",
-            )}
-          >
+          <span className={cn("font-black", numberClassName)}>
             {site.phoneDisplay}
           </span>
         </span>

@@ -25,7 +25,7 @@ export function Logo({
       <div
         className={cn(
           "relative shrink-0 rounded-xl bg-taxi-yellow-dark",
-          variant === "default" ? "h-11 w-11" : "h-9 w-9",
+          variant === "default" ? "h-12 w-12" : "h-9 w-9",
         )}
         aria-hidden
       >
@@ -34,7 +34,7 @@ export function Logo({
           alt=""
           fill
           className="object-contain p-1"
-          sizes="44px"
+          sizes="48px"
           priority
         />
       </div>
@@ -42,12 +42,19 @@ export function Logo({
         <span
           className={cn(
             "font-black text-ink-900",
-            variant === "default" ? "text-xl" : "text-base",
+            variant === "default" ? "text-2xl" : "text-base",
           )}
         >
           {site.shortName}
         </span>
-        <span className="text-xs text-ink-500 -mt-0.5">花蓮計程車</span>
+        <span
+          className={cn(
+            "text-ink-500 -mt-0.5",
+            variant === "default" ? "text-sm" : "text-xs",
+          )}
+        >
+          花蓮計程車
+        </span>
       </div>
     </div>
   );

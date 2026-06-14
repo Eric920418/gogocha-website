@@ -1,10 +1,11 @@
+import type { ReactNode } from "react";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { LineIcon } from "@/components/shared/LineIcon";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 interface LineCTAProps extends Omit<ButtonProps, "asChild" | "children" | "variant"> {
-  label?: string;
+  label?: ReactNode;
   showId?: boolean;
 }
 

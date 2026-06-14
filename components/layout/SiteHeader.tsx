@@ -22,29 +22,37 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md border-b border-sand-200">
-      <div className="mx-auto max-w-6xl px-4 md:px-6 h-16 md:h-20 flex items-center justify-between gap-4">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 h-16 md:h-20 flex items-center justify-between gap-2 xl:gap-4">
         <Logo />
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="主選單">
+        <nav className="hidden lg:flex items-center gap-0 xl:gap-1" aria-label="主選單">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="px-4 py-2 rounded-lg text-base font-bold text-ink-700 hover:text-ink-900 hover:bg-sand-100 transition-colors"
+              className="whitespace-nowrap px-2 xl:px-4 py-2 rounded-lg text-base font-bold text-ink-700 hover:text-ink-900 hover:bg-sand-100 transition-colors"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 xl:gap-2">
           <FontSizeToggle className="hidden md:inline-flex" />
-          <LineCTA className="hidden md:inline-flex" size="default" />
+          <LineCTA
+            className="hidden md:inline-flex"
+            size="default"
+            label={
+              <>
+                LINE<span className="hidden xl:inline"> 叫車</span>
+              </>
+            }
+          />
           <PhoneCTA
             className="hidden sm:inline-flex"
             size="default"
-            hideNumberOnSmall
+            numberClassName="hidden xl:inline"
           />
 
           {/* Mobile menu button */}
