@@ -9,8 +9,8 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://hualientaxi.taxi",
   apiBase:
     process.env.NEXT_PUBLIC_API_BASE ?? "https://api.hualientaxi.taxi",
-  phone: process.env.NEXT_PUBLIC_PHONE ?? "+886900000000",
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "0900-000-000",
+  phone: process.env.NEXT_PUBLIC_PHONE ?? "+88638907320",
+  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "03-890-7320",
   playStoreUrl:
     process.env.NEXT_PUBLIC_PLAY_STORE_URL ??
     "https://play.google.com/store/apps/details?id=com.hualien.taxidriver",

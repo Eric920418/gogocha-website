@@ -162,7 +162,7 @@ git push -u origin main
 
 ### 內容（待替換真實素材 — 目前皆佔位）
 - [ ] 真實品牌數據填入 `lib/site.ts` 的 `stats`（4.9 / 120 等目前是佔位，UI StatPill 仍會顯示）
-- [ ] 真實電話填入環境變數 `NEXT_PUBLIC_PHONE`（佔位 `+886900000000` 時，JSON-LD 與 llms.txt 會自動省略電話、只留 LINE）
+- [x] 真實電話填入環境變數 `NEXT_PUBLIC_PHONE`（佔位 `+886900000000` 時，JSON-LD 與 llms.txt 會自動省略電話、只留 LINE）→ 已設為 `+88638907320`（顯示 `03-890-7320`），JSON-LD／llms.txt 電話揭露已自動放行
 - [ ] `/about` 創辦故事、司機團隊照片 / 人數 / 年資（搜尋程式碼裡的 `TODO` 註解）
 - [ ] 補 `public/og-image.png`（1200×630；schema `image` 目前暫指 `/logo.png`）與 `favicon.ico` / `apple-touch-icon.png`（layout 已引用但檔案缺）
 - [ ] 真實第三方評價到位後，才可在 schema 加回 `aggregateRating`（自家網站自評會違反 Google 政策）
