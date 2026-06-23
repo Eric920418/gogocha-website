@@ -37,7 +37,7 @@
 
 | 路徑 | 內容 | 關鍵元件 |
 |------|------|----------|
-| `/` | 主導向 hero + 三大差異化 + 車資試算器 + 服務區域 + 評價 + B2B + 司機招募 + 終 CTA | DualHero, FareCalculator, B2BSection |
+| `/` | 主導向 hero + 三大差異化 + AI 語音叫車 + 三種叫車方式 + 車資試算器 + 服務區域 + 評價 + B2B + 司機招募 + 終 CTA | DualHero, VoiceAiSection, OrderingChannels, FareCalculator, B2BSection |
 | `/passenger` | 乘客專區 + 下載 App + 評價 | AppDownloadCTA, Testimonial |
 | `/driver` | 司機招募 + 收入試算器 + 申請表單 | IncomeCalculator, DriverApplyForm |
 | `/pricing` | 完整費率表 + 車資試算器 + 車資 FAQ（FAQPage） | FareCalculator, FareTable |
@@ -266,3 +266,4 @@ gogocha-website/
 5. **新增頁面**：記得同步加到 `app/sitemap.ts` 的 ROUTES 與 `SiteHeader.tsx` 的 NAV / `SiteFooter.tsx` 的 COLUMNS
 6. **改 FAQ / 路線內容**：改 `content/faqs.ts` / `content/routes.ts`（UI 與 JSON-LD 共用同一份）；服務區域 13 鄉鎮改 `lib/site.ts` 的 `serviceArea`
 7. **改費率**：改 `lib/api/fare.ts` 的 `FALLBACK_FARE_CONFIG`，`/routes` 估算車資自動跟著變（**勿在 `content/routes.ts` 寫死車資**）
+8. **AI 語音叫車區塊（`components/sections/VoiceAiSection.tsx`）只講好處、不講架構**：對外一律「會發生什麼好事」（秒接不漏接、聽得懂國台語、忙線自動轉真人、3 秒配車），**禁止**寫出任何後端廠商名（如 OpenAI、AudioSocket）、AI 並發門檻、SIP trunk 號碼——那些是商業機密與攻擊面，屬內部文件，不進公開頁面。「忙線轉真人」是把系統的 graceful degradation 翻成消費者信任賣點，講好處、藏門檻。

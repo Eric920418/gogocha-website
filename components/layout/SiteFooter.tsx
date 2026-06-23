@@ -112,11 +112,24 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-ink-700 flex flex-col md:flex-row justify-between gap-4 text-xs text-sand-200">
-          <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+        <div className="mt-12 pt-8 border-t border-ink-700 flex flex-col gap-3 text-xs text-sand-200">
+          <div className="flex flex-col md:flex-row justify-between gap-2">
+            <p>
+              © {new Date().getFullYear()} {site.name}. All rights reserved.
+            </p>
+            <p>服務區域：花蓮縣｜車資依花蓮縣政府公告計算</p>
+          </div>
+          <p className="text-sand-200/80">
+            網站製作：
+            <a
+              href="https://www.falconinformation.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-sand-200 underline-offset-2 hover:text-taxi-yellow hover:underline transition-colors"
+            >
+              隼訊數位行銷有限公司
+            </a>
           </p>
-          <p>服務區域：花蓮縣｜車資依花蓮縣政府公告計算</p>
         </div>
       </div>
     </footer>
