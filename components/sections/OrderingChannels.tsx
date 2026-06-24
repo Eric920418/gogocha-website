@@ -9,10 +9,10 @@ const CHANNELS = [
   {
     type: "phone",
     title: "電話叫車",
-    headline: "最直接，三秒撥通",
-    desc: "不會用手機 App 也沒關係，直接撥客服專線即可。24h 在地客服。",
+    headline: "最直接，AI 秒接",
+    desc: "不會用 App 沒關係。撥進來 AI 像真人接、聽得懂國台語，說出地點就好，忙線自動轉真人。24h 在地客服待命。",
     ctaLabel: "立即撥打",
-    audience: "適合所有人",
+    audience: "適合所有人（長輩最愛）",
     icon: Phone,
     iconBg: "bg-taxi-yellow/30",
     iconColor: "text-taxi-yellow-ink",

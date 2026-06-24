@@ -26,8 +26,8 @@ export const metadata: Metadata = {
 const FEATURES = [
   {
     icon: Mic,
-    title: "語音叫車",
-    desc: "說話就能叫車，不用打字。「我要叫車到花蓮車站」即可。",
+    title: "App 語音輸入",
+    desc: "在 App 裡說話就能叫車，不用打字。「我要叫車到花蓮車站」即可。",
   },
   {
     icon: Eye,
@@ -41,8 +41,8 @@ const FEATURES = [
   },
   {
     icon: Phone,
-    title: "電話也能叫",
-    desc: "不會用 App 沒關係，撥打客服專線一樣可以叫車。",
+    title: "電話叫車・AI 接聽",
+    desc: "不會用 App 沒關係。撥客服專線，AI 像真人接、聽得懂台語，說出地點就好，忙線自動轉真人。",
   },
   {
     icon: CreditCard,
@@ -70,7 +70,7 @@ export default function PassengerPage() {
             <span className="text-trust-blue-dark">花蓮車到你身邊</span>
           </h1>
           <p className="mt-5 text-lg md:text-xl text-ink-700 leading-relaxed">
-            無論是長輩看診、上班通勤、機場接送，還是夜歸回家。GoGoCha 24 小時在地車隊三秒撥通。
+            無論是長輩看診、上班通勤、機場接送，還是夜歸回家——打電話進來，AI 像真人接、聽得懂台語，GoGoCha 24 小時在地車隊三秒幫你派車。
           </p>
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
             <PhoneCTA size="xl" />

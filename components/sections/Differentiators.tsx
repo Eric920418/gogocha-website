@@ -1,6 +1,6 @@
 import { Section } from "@/components/layout/Section";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Zap, ScrollText, Accessibility } from "lucide-react";
+import { Zap, ScrollText, PhoneCall } from "lucide-react";
 
 const POINTS = [
   {
@@ -14,9 +14,9 @@ const POINTS = [
     desc: "費率對齊花蓮縣政府公告，無平台加成、無夜間漫天喊價。所有費率公開可試算。",
   },
   {
-    icon: Accessibility,
-    title: "長輩友善・語音叫車",
-    desc: "大字按鈕、語音指令、無障礙設計。爸媽阿公阿嬤自己叫車也安心，不用再麻煩孩子。",
+    icon: PhoneCall,
+    title: "AI 語音接線・長輩也會用",
+    desc: "打電話進來，AI 像真人接、聽得懂國台語，說出地點就好；忙線自動轉真人。長輩不用學 App，自己也能叫車。",
   },
 ];
 

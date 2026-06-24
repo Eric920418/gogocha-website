@@ -5,7 +5,7 @@ export const site = {
   name: "GoGoCha 花蓮計程車",
   shortName: "GoGoCha",
   description:
-    "花蓮在地 24h 計程車隊，跳表車資依花蓮縣政府公告，長輩友善大字按鈕，AI 智慧派車。叫車三秒撥通。",
+    "花蓮在地 24h 計程車隊，打電話 AI 像真人接聽、聽得懂台語，跳表車資依花蓮縣政府公告、長輩友善。叫車三秒撥通。",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://hualientaxi.taxi",
   apiBase:
     process.env.NEXT_PUBLIC_API_BASE ?? "https://api.hualientaxi.taxi",

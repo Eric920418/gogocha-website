@@ -37,7 +37,7 @@
 
 | 路徑 | 內容 | 關鍵元件 |
 |------|------|----------|
-| `/` | 主導向 hero + 三大差異化 + AI 語音叫車 + 三種叫車方式 + 車資試算器 + 服務區域 + 評價 + B2B + 司機招募 + 終 CTA | DualHero, VoiceAiSection, OrderingChannels, FareCalculator, B2BSection |
+| `/` | hero 主打「AI 接電話」(主菜) → AI 語音深入介紹 → 雙入口 → 三大差異化 → 三種叫車方式 → 車資試算 → 服務區域 → 評價 → B2B → 司機招募 → 終 CTA | DualHero, VoiceAiSection, OrderingChannels, FareCalculator, B2BSection |
 | `/passenger` | 乘客專區 + 下載 App + 評價 | AppDownloadCTA, Testimonial |
 | `/driver` | 司機招募 + 收入試算器 + 申請表單 | IncomeCalculator, DriverApplyForm |
 | `/pricing` | 完整費率表 + 車資試算器 + 車資 FAQ（FAQPage） | FareCalculator, FareTable |
@@ -267,3 +267,8 @@ gogocha-website/
 6. **改 FAQ / 路線內容**：改 `content/faqs.ts` / `content/routes.ts`（UI 與 JSON-LD 共用同一份）；服務區域 13 鄉鎮改 `lib/site.ts` 的 `serviceArea`
 7. **改費率**：改 `lib/api/fare.ts` 的 `FALLBACK_FARE_CONFIG`，`/routes` 估算車資自動跟著變（**勿在 `content/routes.ts` 寫死車資**）
 8. **AI 語音叫車區塊（`components/sections/VoiceAiSection.tsx`）只講好處、不講架構**：對外一律「會發生什麼好事」（秒接不漏接、聽得懂國台語、忙線自動轉真人、3 秒配車），**禁止**寫出任何後端廠商名（如 OpenAI、AudioSocket）、AI 並發門檻、SIP trunk 號碼——那些是商業機密與攻擊面，屬內部文件，不進公開頁面。「忙線轉真人」是把系統的 graceful degradation 翻成消費者信任賣點，講好處、藏門檻。
+9. **兩個「語音」不要混為一談（改文案的地雷）**：
+   - **「打電話 AI 接聽」= 主菜**（hero 主打）：客人撥 `site.phoneDisplay`，AI 像真人接、聽得懂台語、忙線轉真人。文案一律寫「打電話 / 撥客服專線 → AI 接」。
+   - **「App 語音輸入」= 次要既有功能**：在 App 裡對著手機說話免打字（passenger 頁 `App 語音輸入` 卡、Mic 圖示）。文案寫「在 App 裡說」。
+   - 兩者**分開講**，別寫成「對 App 說話叫 AI」這種自相矛盾句。主菜定位散見於 `DualHero`、`VoiceAiSection`、`Differentiators` 第三點、`OrderingChannels` 電話卡、`FinalCTA`、`faqs.ts`「叫車與預約」、`llms.txt`、`site.description`、`opengraph-image`。
+10. **禁止虛構 AI 數據**：接通率、平均接聽秒數等，沒有真實量測數字就不要寫進任何頁面或 trust strip。

@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   keywords: [
     "花蓮計程車",
     "花蓮叫車",
+    "花蓮 AI 叫車",
+    "AI 語音客服",
+    "花蓮無障礙叫車",
     "花蓮包車",
     "花蓮機場接送",
     "太魯閣包車",

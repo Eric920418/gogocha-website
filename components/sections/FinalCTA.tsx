@@ -11,9 +11,9 @@ export function FinalCTA() {
           現在就叫一台車
         </h2>
         <p className="mt-5 text-lg md:text-xl text-ink-700">
-          無論上班、看診、回家、接機，選最順手的方式，
+          無論上班、看診、回家、接機——打電話 AI 秒接，或用 LINE / App，
           <br className="hidden md:block" />
-          花蓮在地司機三秒撥通。
+          花蓮在地司機三秒到。
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-6">

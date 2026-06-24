@@ -14,9 +14,9 @@ export default function HomePage() {
   return (
     <>
       <DualHero />
+      <VoiceAiSection />
       <DualEntryCards />
       <Differentiators />
-      <VoiceAiSection />
       <OrderingChannels />
       <FareCalculatorSection />
       <CoverageStrip />

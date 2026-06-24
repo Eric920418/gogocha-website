@@ -70,7 +70,7 @@ export default function OGImage() {
               margin: 0,
             }}
           >
-            在地 24h 車隊・透明跳表車資・長輩友善大字按鈕
+            AI 接電話像真人・聽得懂台語・在地 24h 車隊
           </p>
         </div>
 
