@@ -17,7 +17,7 @@ const CHANNELS = [
     iconBg: "bg-taxi-yellow/30",
     iconColor: "text-taxi-yellow-ink",
     accent: "border-taxi-yellow-dark",
-    href: `tel:${site.phone}`,
+    href: `tel:${site.phoneDial}`,
     external: false,
     primary: true,
   },

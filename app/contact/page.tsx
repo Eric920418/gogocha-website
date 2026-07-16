@@ -22,7 +22,7 @@ const CHANNELS = [
     title: "立即叫車",
     desc: "24h 不打烊・三秒撥通",
     value: site.phoneDisplay,
-    href: `tel:${site.phone}`,
+    href: `tel:${site.phoneDial}`,
     accent: "text-taxi-yellow-ink bg-taxi-yellow/30",
   },
   {

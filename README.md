@@ -89,7 +89,7 @@ pnpm build && pnpm start
 | `NEXT_PUBLIC_SITE_URL` | 網站正式 URL（影響 OG / sitemap） |
 | `NEXT_PUBLIC_PLAY_STORE_URL` | Google Play 連結 |
 | `NEXT_PUBLIC_IOS_WAITLIST_URL` | iOS 預約頁路徑 |
-| `NEXT_PUBLIC_PHONE` | 撥打號碼（含國碼 +886） |
+| `NEXT_PUBLIC_PHONE` | 正規電話：E.164 國際格式（含國碼 `+886`）。供 JSON-LD／llms.txt 等機器讀取（Google 建議格式）。**`tel:` 撥號連結不直接用它**——`lib/site.ts` 的 `toLocalDial()` 自動衍生 `site.phoneDial`（去 `+886`、補回前導 `0`，例：`+88638907320` → `038907320`），因手機端撥 `tel:+886` 市話常被當國際碼卡住撥不出 |
 | `NEXT_PUBLIC_PHONE_DISPLAY` | 顯示用號碼（含 dash） |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics 4 ID（選填） |
 

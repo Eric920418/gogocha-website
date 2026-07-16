@@ -1,4 +1,19 @@
 /**
+ * 台灣 E.164（+886…）轉「本地撥號字串」。
+ * 手機端撥 `tel:+886` 市話常被當國際碼、需撥號器把「+886 3」智慧還原成「03」，
+ * 部分電信/機型不會轉導致撥不出；改用本地格式（去 +886、補回前導 0）最穩。
+ * 非 +886 號碼只去掉開頭的 +，其餘原樣保留。
+ */
+export function toLocalDial(phone: string): string {
+  const digits = phone.replace(/[^\d+]/g, "");
+  return digits.startsWith("+886")
+    ? `0${digits.slice(4)}`
+    : digits.replace(/^\+/, "");
+}
+
+const rawPhone = process.env.NEXT_PUBLIC_PHONE ?? "+88638907320";
+
+/**
  * 全站共用設定 — 部署前換成真實值。
  */
 export const site = {
@@ -9,7 +24,10 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://hualientaxi.taxi",
   apiBase:
     process.env.NEXT_PUBLIC_API_BASE ?? "https://api.hualientaxi.taxi",
-  phone: process.env.NEXT_PUBLIC_PHONE ?? "+88638907320",
+  // 正規來源：E.164 國際格式，給 JSON-LD/schema、llms.txt 等機器讀取用（Google 建議格式）
+  phone: rawPhone,
+  // 衍生：tel: 撥號連結專用的本地格式（避免手機撥 +886 市話失敗）
+  phoneDial: toLocalDial(rawPhone),
   phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "03-890-7320",
   playStoreUrl:
     process.env.NEXT_PUBLIC_PLAY_STORE_URL ??

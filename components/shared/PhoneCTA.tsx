@@ -25,7 +25,7 @@ export function PhoneCTA({
       className={cn("tabular-nums", className)}
       {...props}
     >
-      <a href={`tel:${site.phone}`} aria-label={`撥打 ${site.phoneDisplay}`}>
+      <a href={`tel:${site.phoneDial}`} aria-label={`撥打 ${site.phoneDisplay}`}>
         <Phone className="size-5" aria-hidden />
         <span className="flex flex-col items-start leading-tight">
           <span className="text-xs font-medium opacity-80">{label}</span>

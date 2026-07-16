@@ -51,7 +51,7 @@ export function SiteFooter() {
             </p>
             <div className="mt-5 flex flex-col gap-2">
               <a
-                href={`tel:${site.phone}`}
+                href={`tel:${site.phoneDial}`}
                 className="inline-flex items-center gap-2 text-xl font-black text-taxi-yellow tabular-nums hover:text-taxi-yellow-dark transition-colors"
               >
                 <PhoneIcon className="size-5" aria-hidden />
