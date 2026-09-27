@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/pages";
 import { Section } from "@/components/layout/Section";
 import { BrandBadge } from "@/components/brand/BrandBadge";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
@@ -8,12 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildFAQJsonLd, buildBreadcrumbJsonLd } from "@/lib/seo/jsonld";
 import { faqs, faqsByCategory, FAQ_CATEGORIES } from "@/content/faqs";
 
-export const metadata: Metadata = {
-  title: "花蓮計程車常見問題｜叫車、車資、付款、機場接送 FAQ",
-  description:
-    "花蓮叫車前先看這裡：怎麼叫車最快、跳表車資怎麼算、可以刷卡嗎、機場與車站接送、半夜有沒有車、長輩怎麼叫車。花蓮在地車隊一次幫你說清楚。",
-  alternates: { canonical: "/faq" },
-};
+export const metadata = pageMetadata("/faq");
 
 export default function FaqPage() {
   return (
@@ -58,6 +53,9 @@ export default function FaqPage() {
         </div>
       </Section>
 
+      <Section className="bg-sand-100">
+        <p className="text-base leading-relaxed">費率來源與適用日期請見 <a href="/pricing" className="font-bold underline text-trust-blue-dark">官方車資說明</a>；太魯閣與山區行程請先查 <a href="https://www.taroko.gov.tw/" className="font-bold underline text-trust-blue-dark">太魯閣國家公園官方開放資訊</a>，再與客服確認。</p>
+      </Section>
       {/* CTA */}
       <Section className="bg-ink-900 text-sand-50">
         <div className="max-w-3xl mx-auto text-center">
@@ -65,7 +63,7 @@ export default function FaqPage() {
             還是想直接問？
           </h2>
           <p className="text-lg text-sand-200 leading-relaxed mb-8">
-            找不到你要的答案，或想直接叫車——花蓮在地客服三秒撥通，24 小時都有人接。
+            找不到你要的答案，或想直接叫車——可透過電話或 LINE 聯絡花蓮在地客服，確認接送安排。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <PhoneCTA size="xl" />

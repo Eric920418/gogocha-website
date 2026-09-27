@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/lib/seo/jsonld";
+import { pageMetadata } from "@/lib/seo/pages";
 import { Section } from "@/components/layout/Section";
 import { Card, CardContent } from "@/components/ui/card";
 import { BrandBadge } from "@/components/brand/BrandBadge";
 import { PhoneCTA } from "@/components/shared/PhoneCTA";
 import { LineCTA } from "@/components/shared/LineCTA";
 import { AppDownloadCTA } from "@/components/shared/AppDownloadCTA";
-import { Testimonial } from "@/components/shared/Testimonial";
-import { testimonials } from "@/content/testimonials";
 import {
   Mic,
   Eye,
@@ -16,12 +16,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "乘客叫車｜花蓮在地24h車隊・長輩友善",
-  description:
-    "GoGoCha 乘客叫車。電話三秒撥通、跳表車資依花蓮縣政府公告、大字按鈕長輩友善、語音叫車。花蓮在地車隊，24h 服務。",
-  alternates: { canonical: "/passenger" },
-};
+export const metadata = pageMetadata("/passenger");
 
 const FEATURES = [
   {
@@ -37,7 +32,7 @@ const FEATURES = [
   {
     icon: HandHeart,
     title: "無障礙友善",
-    desc: "標示輪椅可上下車車輛，特殊需求備註，司機提前準備。",
+    desc: "輪椅尺寸、能否移位及協助需求請預約時說明，由客服確認合適車型。",
   },
   {
     icon: Phone,
@@ -47,7 +42,7 @@ const FEATURES = [
   {
     icon: CreditCard,
     title: "多元支付",
-    desc: "現金、信用卡、悠遊卡、LINE Pay、街口支付，自由選擇。",
+    desc: "使用信用卡、悠遊卡或行動支付前，請由客服確認安排車輛可接受的方式。",
   },
   {
     icon: ShieldCheck,
@@ -59,6 +54,7 @@ const FEATURES = [
 export default function PassengerPage() {
   return (
     <>
+      <JsonLd data={buildBreadcrumbJsonLd([{ name: "首頁", path: "/" }, { name: "乘客叫車", path: "/passenger" }])} />
       <Section className="bg-sand-50 pt-16 md:pt-24 pb-8">
         <div className="max-w-3xl">
           <BrandBadge variant="yellow" className="mb-4">
@@ -70,7 +66,7 @@ export default function PassengerPage() {
             <span className="text-trust-blue-dark">花蓮車到你身邊</span>
           </h1>
           <p className="mt-5 text-lg md:text-xl text-ink-700 leading-relaxed">
-            無論是長輩看診、上班通勤、機場接送，還是夜歸回家——打電話進來，AI 像真人接、聽得懂台語，GoGoCha 24 小時在地車隊三秒幫你派車。
+            無論是長輩看診、上班通勤、機場接送，還是夜歸回家——打電話進來，AI 像真人接、聽得懂台語，請提供時間與地點，由 GoGoCha 客服確認派車安排。
           </p>
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
             <PhoneCTA size="xl" />
@@ -118,18 +114,14 @@ export default function PassengerPage() {
       </Section>
 
       <Section className="bg-sand-50">
-        <div className="text-center mb-12 max-w-2xl mx-auto">
-          <p className="text-sm font-bold text-trust-blue uppercase tracking-widest mb-3">
-            真實乘客評價
-          </p>
-          <h2 className="text-3xl md:text-5xl font-black text-ink-900 leading-tight">
-            花蓮人說的算
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {testimonials.map((t) => (
-            <Testimonial key={t.name} {...t} />
-          ))}
+        <div className="max-w-3xl space-y-6">
+          <h2 className="text-3xl font-black">電話與 LINE 預約，先準備這些資訊</h2>
+          <ol className="list-decimal pl-6 space-y-4 text-lg leading-relaxed">
+            <li>提供上車地址或車站出口、目的地、用車日期與時間。</li>
+            <li>告知乘客人數、行李件數；輪椅、付款方式與其他需求請一併說明。</li>
+            <li>等待客服確認車輛、會合地點及時間；航班或行程異動請主動通知。</li>
+          </ol>
+          <p className="text-base leading-relaxed">送出訊息不等於預約完成。偏遠地區、夜間與跨區接送依當時車況安排；機場與車站接送請預留交通及報到時間。</p>
         </div>
       </Section>
     </>

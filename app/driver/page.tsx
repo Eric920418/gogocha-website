@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/lib/seo/jsonld";
+import { pageMetadata } from "@/lib/seo/pages";
 import Link from "next/link";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/button";
@@ -15,12 +17,7 @@ import {
   Check,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "司機招募｜花蓮在地車隊・AI 智慧派單",
-  description:
-    "加入 GoGoCha 花蓮計程車隊。AI 自動接單、平台費業界最低 8%、在地調度。先試算月收入，再決定加入。",
-  alternates: { canonical: "/driver" },
-};
+export const metadata = pageMetadata("/driver");
 
 const REASONS = [
   {
@@ -67,6 +64,7 @@ const FAQS = [
 export default function DriverPage() {
   return (
     <>
+      <JsonLd data={buildBreadcrumbJsonLd([{ name: "首頁", path: "/" }, { name: "司機招募", path: "/driver" }])} />
       {/* Hero */}
       <Section className="bg-gradient-to-br from-taxi-yellow to-taxi-yellow-dark pt-16 md:pt-24 pb-12 md:pb-16">
         <div className="max-w-3xl">

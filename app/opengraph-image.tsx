@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { site, stats } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const runtime = "edge";
 export const alt = `${site.name} — 花蓮在地 24h 計程車隊`;
@@ -52,7 +52,7 @@ export default function OGImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <h1
             style={{
-              fontSize: 88,
+              fontSize: 76,
               fontWeight: 900,
               color: "#1F1B0A",
               margin: 0,
@@ -60,7 +60,7 @@ export default function OGImage() {
               letterSpacing: -2,
             }}
           >
-            在花蓮，叫車三秒撥通
+            花蓮叫車・電話與 LINE
           </h1>
           <p
             style={{
@@ -84,11 +84,9 @@ export default function OGImage() {
             fontWeight: 700,
           }}
         >
-          <span>★ {stats.rating}／{stats.reviewCount} 則評價</span>
-          <span>•</span>
-          <span>{stats.totalTrips} 趟次</span>
-          <span>•</span>
-          <span>花蓮全縣 {stats.coverageTowns} 鄉鎮</span>
+          <span>{site.phoneDisplay}</span>
+          <span>LINE {site.lineOAId}</span>
+          <span>機場・車站・市區接送</span>
         </div>
       </div>
     ),

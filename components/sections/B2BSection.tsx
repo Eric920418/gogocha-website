@@ -9,7 +9,7 @@ const B2B_ITEMS = [
     icon: Plane,
     title: "旅行社",
     headline: "旺季不斷車",
-    desc: "固定合約車隊保留・提前 24h 預約・太魯閣／清水斷崖路線熟悉司機優先派遣。",
+    desc: "團體接送請提前確認人數與行程；太魯閣、清水斷崖需先查開放資訊，再確認可行路線。",
     cta: "申請旅行社合約",
     href: "/contact?type=business&segment=travel",
   },

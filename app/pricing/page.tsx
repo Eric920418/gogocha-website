@@ -1,86 +1,83 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo/pages";
 import { Section } from "@/components/layout/Section";
-import { FareCalculator } from "@/components/fare-calculator/FareCalculator";
-import { FareTable, FareRulesList } from "@/components/fare-calculator/FareTable";
-import { BrandBadge } from "@/components/brand/BrandBadge";
+import { PhoneCTA } from "@/components/shared/PhoneCTA";
+import { LineCTA } from "@/components/shared/LineCTA";
+import { FaqList } from "@/components/shared/FaqList";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { buildLocalBusinessJsonLd, buildFAQJsonLd } from "@/lib/seo/jsonld";
+import { buildBreadcrumbJsonLd, buildFAQJsonLd } from "@/lib/seo/jsonld";
+import { farePolicy } from "@/content/fare-policy";
 import { faqsByCategory } from "@/content/faqs";
 
-export const metadata: Metadata = {
-  title: "花蓮計程車車資試算｜縣府公告跳表費率一覽",
-  description:
-    "花蓮計程車透明車資表：起跳 NT$100、續跳每 250m NT$5、夜間 23-06 加成 20%。對齊花蓮縣政府公告，無平台加成。提供即時車資試算器。",
-  alternates: { canonical: "/pricing" },
-};
-
-// 車資與付款分類 FAQ：頁面顯示與 FAQPage schema 共用同一子集（內容＝可見內容）
+export const metadata = pageMetadata("/pricing");
 const pricingFaqs = faqsByCategory("車資與付款");
 
 export default function PricingPage() {
   return (
     <>
-      <JsonLd data={buildLocalBusinessJsonLd()} />
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: "首頁", path: "/" },
+          { name: "車資說明", path: "/pricing" },
+        ])}
+      />
       <JsonLd data={buildFAQJsonLd(pricingFaqs)} />
-
-      <Section className="bg-sand-50 pt-16 pb-8 md:pt-24 md:pb-12">
-        <div className="max-w-3xl">
-          <BrandBadge variant="blue" className="mb-4">
-            透明車資・無加成
-          </BrandBadge>
-          <h1 className="text-4xl md:text-6xl font-black text-ink-900 leading-tight">
-            花蓮計程車車資
-            <br />
-            <span className="text-trust-blue-dark">
-              花蓮縣政府公告跳表費率
-            </span>
+      <Section className="bg-sand-50 pt-16 md:pt-24">
+        <div className="max-w-3xl space-y-6">
+          <h1 className="text-4xl md:text-6xl font-black text-ink-900">
+            花蓮計程車費率與收費說明
           </h1>
-          <p className="mt-5 text-lg text-ink-700 leading-relaxed">
-            GoGoCha 所有司機統一依花蓮縣政府公告計費。沒有平台抽成、沒有夜間漫天喊價、沒有觀光客加價。先試算、再上車。
+          <p className="text-lg leading-relaxed">
+            一般接送實際依計費表收費。路線、等候及夜間時段會影響金額；請用電話或
+            LINE
+            提供行程，先確認接送安排。本頁提供官方公告摘要，不提供數值試算或固定路線報價。
           </p>
+          <p className="text-sm text-ink-500">
+            資料查核日期：
+            <time dateTime={farePolicy.reviewedAt}>
+              {farePolicy.reviewedAt}
+            </time>
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <PhoneCTA />
+            <LineCTA label="加 LINE 詢問接送" />
+          </div>
         </div>
       </Section>
-
-      <Section className="bg-sand-100 py-12 md:py-16">
-        <FareCalculator />
+      <Section className="bg-sand-100">
+        <div className="max-w-3xl space-y-8">
+          <h2 className="text-3xl font-black">2026 年查核適用費率</h2>
+          <p className="text-lg leading-relaxed">{farePolicy.current}</p>
+          <h3 className="text-xl font-black">夜間費率</h3>
+          <p className="text-lg leading-relaxed">{farePolicy.night}</p>
+          <h3 className="text-xl font-black">春節期間</h3>
+          <p className="text-lg leading-relaxed">{farePolicy.spring}</p>
+          <a
+            href={farePolicy.currentSource}
+            className="font-bold text-trust-blue-dark underline"
+          >
+            資料來源：花蓮縣政府計程車運價公告（PDF）
+          </a>
+          <h2 className="text-3xl font-black">2027 年 1 月 1 日起的新制</h2>
+          <p className="text-lg leading-relaxed">{farePolicy.future}</p>
+          <a
+            href={farePolicy.futureSource}
+            className="font-bold text-trust-blue-dark underline"
+          >
+            資料來源：縣府 2027 年運價調整公告
+          </a>
+        </div>
       </Section>
-
       <Section className="bg-sand-50">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-          <FareTable />
-          <FareRulesList />
-        </div>
-      </Section>
-
-      <Section className="bg-ink-900 text-sand-50">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black mb-8 text-center">
-            車資常見問題
-          </h2>
-          <div className="grid gap-4 text-left">
-            {pricingFaqs.map((f) => (
-              <div
-                key={f.question}
-                className="bg-white/5 rounded-2xl p-5 md:p-6 border border-white/10"
-              >
-                <h3 className="font-black text-lg text-taxi-yellow mb-2">
-                  Q. {f.question}
-                </h3>
-                <p className="text-base text-sand-200 leading-relaxed">
-                  {f.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Link
-              href="/faq"
-              className="inline-flex items-center gap-1 font-bold text-taxi-yellow underline underline-offset-4 hover:text-taxi-yellow-dark"
-            >
-              看全部常見問題
-            </Link>
-          </div>
+        <div className="max-w-3xl space-y-6">
+          <h2 className="text-3xl font-black">車資與付款常見問題</h2>
+          <FaqList items={pricingFaqs} />
+          <Link
+            href="/routes"
+            className="inline-block font-bold text-trust-blue-dark underline"
+          >
+            查看機場與車站接送指南
+          </Link>
         </div>
       </Section>
     </>

@@ -17,11 +17,10 @@ export function CoverageStrip() {
           <h2 className="text-3xl md:text-5xl font-black leading-tight mb-6">
             花蓮全縣 13 鄉鎮市，
             <br />
-            一鍵呼叫到家門口
+            提前確認接送安排
           </h2>
           <p className="text-base md:text-lg text-sand-200 leading-relaxed">
-            從北端的秀林鄉到南端的富里鄉，從濱海到中央山脈，GoGoCha
-            的在地司機熟悉每一條花蓮道路。
+            從秀林鄉到富里鄉，皆可洽詢接送需求。偏遠、山區與跨鄉鎮路線請提前確認，依車輛供應、天候及道路管制安排。
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {TOWNS.map((t) => (

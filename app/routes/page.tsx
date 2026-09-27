@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/pages";
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Section } from "@/components/layout/Section";
@@ -10,16 +10,10 @@ import { LineCTA } from "@/components/shared/LineCTA";
 import { FaqList } from "@/components/shared/FaqList";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildBreadcrumbJsonLd, buildFAQJsonLd } from "@/lib/seo/jsonld";
-import { routes, estimateDayFare } from "@/content/routes";
+import { routes } from "@/content/routes";
 import { faqsByQuestion } from "@/content/faqs";
-import { formatCurrency } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "花蓮計程車車資與車程指南｜機場、車站到太魯閣、七星潭多少錢",
-  description:
-    "花蓮熱門路線一次查：花蓮機場到市區、火車站到太魯閣、到七星潭、清水斷崖大概多少錢、要開多久。跳表估算、在地司機熟門熟路，實際以司機跳表為準。",
-  alternates: { canonical: "/routes" },
-};
+export const metadata = pageMetadata("/routes");
 
 // 本頁顯示的 OD 相關問答（同一組同時驅動畫面與 FAQPage schema）
 const ROUTE_FAQS = faqsByQuestion([
@@ -35,7 +29,7 @@ export default function RoutesPage() {
       <JsonLd
         data={buildBreadcrumbJsonLd([
           { name: "首頁", path: "/" },
-          { name: "熱門路線車資", path: "/routes" },
+          { name: "熱門接送路線", path: "/routes" },
         ])}
       />
       <JsonLd data={buildFAQJsonLd(ROUTE_FAQS)} />
@@ -44,26 +38,31 @@ export default function RoutesPage() {
       <Section className="bg-sand-50 pt-16 md:pt-24 pb-6 md:pb-8">
         <div className="max-w-3xl">
           <BrandBadge variant="blue" className="mb-4">
-            熱門路線車資
+            熱門接送路線
           </BrandBadge>
           <h1 className="text-4xl md:text-6xl font-black text-ink-900 leading-tight">
             花蓮熱門路線
             <br />
-            <span className="text-trust-blue-dark">要多少錢、開多久</span>
+            <span className="text-trust-blue-dark">上車地點與預約提醒</span>
           </h1>
           <p className="mt-5 text-lg text-ink-700 leading-relaxed">
-            機場、火車站到市區、太魯閣、七星潭、清水斷崖——花蓮最多人問的路線，車資與車程一次看清楚。以下為日間跳表估算，實際依當天路況與司機跳表為準；夜間 23:00–06:00 另加成 20%。
+            花蓮機場、火車站與市區接送，請先提供日期時間、上下車地點、人數及行李。車資與車程受實際路線、等候和路況影響，請透過電話或 LINE 確認安排，實際依計費表收費。
           </p>
         </div>
       </Section>
 
+      <Section className="bg-sand-100 py-8">
+        <nav aria-label="接送路線索引" className="flex flex-wrap gap-3 mb-6">
+          {routes.map((r) => <Link key={r.slug} href={`#${r.slug}`} className="underline text-trust-blue-dark p-2">{r.from} → {r.to}</Link>)}
+        </nav>
+        <p className="text-base leading-relaxed">太魯閣、清水斷崖及山區路線受天候與管制影響。出發前請查閱 <a href="https://www.taroko.gov.tw/" className="font-bold underline text-trust-blue-dark">太魯閣國家公園官方開放資訊</a>，並與客服確認可行路線。</p>
+      </Section>
       {/* 路線列表 */}
       <Section className="bg-sand-50 pt-4 md:pt-6">
         <div className="max-w-4xl grid gap-4">
           {routes.map((r) => {
-            const fare = estimateDayFare(r.distanceMeters);
             return (
-              <Card key={r.slug}>
+              <Card key={r.slug} id={r.slug} className="scroll-mt-24">
                 <CardContent className="p-5 md:p-6">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div className="flex items-center gap-2 md:gap-3 min-w-0">
@@ -71,28 +70,15 @@ export default function RoutesPage() {
                         className="size-5 shrink-0 text-trust-blue"
                         aria-hidden
                       />
-                      <span className="text-lg md:text-xl font-black text-ink-900">
+                      <h2 className="text-lg md:text-xl font-black text-ink-900">
                         {r.from}
                         <span className="px-1.5 font-normal text-ink-500">
                           →
                         </span>
                         {r.to}
-                      </span>
+                      </h2>
                     </div>
-                    <div className="flex items-center gap-6 md:gap-8 shrink-0 pl-7 md:pl-0">
-                      <div>
-                        <p className="text-xs text-ink-500">車程</p>
-                        <p className="text-base font-bold text-ink-900 tabular-nums">
-                          {r.estMinutes}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-ink-500">跳表估算</p>
-                        <p className="text-lg font-black text-trust-blue-dark tabular-nums">
-                          約 {formatCurrency(fare)}
-                        </p>
-                      </div>
-                    </div>
+
                   </div>
                   <p className="mt-3 text-base text-ink-700 leading-relaxed">
                     {r.note}
@@ -104,8 +90,8 @@ export default function RoutesPage() {
                       size="sm"
                       className="mt-4"
                     >
-                      <Link href="/contact?type=business">
-                        這段建議包車，問問怎麼安排
+                      <Link href="/contact">
+                        詢問長途與回程安排
                         <ArrowRight className="size-4" aria-hidden />
                       </Link>
                     </Button>
@@ -118,12 +104,12 @@ export default function RoutesPage() {
 
         <div className="max-w-4xl mt-8">
           <p className="text-base text-ink-700 leading-relaxed">
-            想知道完整費率怎麼算、或自己輸入距離試算？
+            想知道官方費率與夜間、春節收費規則？
             <Link
               href="/pricing"
               className="ml-1 font-bold text-trust-blue-dark underline underline-offset-4 hover:text-trust-blue"
             >
-              看透明車資與即時試算器
+              看官方費率與收費說明
             </Link>
           </p>
         </div>
@@ -148,7 +134,7 @@ export default function RoutesPage() {
             準備好出發了嗎？
           </h2>
           <p className="text-lg text-sand-200 leading-relaxed mb-8">
-            無論接機、趕車、看海還是包車一日遊，花蓮在地司機熟悉每一條路。三秒撥通，或加 LINE 先講好行程。
+            無論接機、趕車、看海還是包車一日遊，花蓮在地司機熟悉每一條路。請打電話或加 LINE，先確認行程與車輛安排。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <PhoneCTA size="xl" />

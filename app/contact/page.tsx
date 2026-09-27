@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/lib/seo/jsonld";
+import { pageMetadata } from "@/lib/seo/pages";
 import { Suspense } from "react";
 import { Section } from "@/components/layout/Section";
 import { BrandBadge } from "@/components/brand/BrandBadge";
@@ -9,18 +11,13 @@ import { LineQR } from "@/components/shared/LineQR";
 import { Mail, Phone as PhoneIcon, Clock } from "lucide-react";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "聯絡我們｜花蓮計程車 GoGoCha",
-  description:
-    "聯絡 GoGoCha 花蓮計程車：電話叫車、B2B 合作詢價、客戶建議。客服時間 24 小時，B2B 業務時間 09:00-21:00。",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = pageMetadata("/contact");
 
 const CHANNELS = [
   {
     icon: PhoneIcon,
     title: "立即叫車",
-    desc: "24h 不打烊・三秒撥通",
+    desc: "電話聯絡・確認接送",
     value: site.phoneDisplay,
     href: `tel:${site.phoneDial}`,
     accent: "text-taxi-yellow-ink bg-taxi-yellow/30",
@@ -85,6 +82,7 @@ function ChannelInner({
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={buildBreadcrumbJsonLd([{ name: "首頁", path: "/" }, { name: "聯絡我們", path: "/contact" }])} />
       <Section className="bg-sand-50 pt-16 md:pt-24 pb-8">
         <div className="max-w-3xl">
           <BrandBadge variant="blue" className="mb-4">

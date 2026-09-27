@@ -36,20 +36,20 @@ const BENEFITS = [
   },
   {
     icon: UserCheck,
-    title: "忙線自動轉真人，絕不漏接",
-    desc: "電話多到接不完時，立刻接力給在地真人客服。半夜、颱風天、過年都接得到。",
+    title: "需要協助，可轉真人客服",
+    desc: "需要真人協助時可提出轉接需求，也可透過 LINE 留下行程，等待客服確認。",
   },
   {
     icon: Zap,
-    title: "講完地點，3 秒配到車",
-    desc: "說完上車地點，系統立刻為你配到最近的車，不用等、不用反覆確認。",
+    title: "說明行程，確認派車",
+    desc: "提供上下車地點與時間，由客服確認派車。實際等候依附近空車與路況而定。",
   },
 ];
 
 const STEPS = [
   { icon: PhoneCall, title: "撥打電話", desc: "撥打 24h 客服專線" },
   { icon: Mic, title: "AI 對話、聽懂你", desc: "說出地點與需求，忙線自動轉真人" },
-  { icon: Car, title: "3 秒配到車", desc: "系統派最近的車來接你" },
+  { icon: Car, title: "確認車輛安排", desc: "依車況確認會合地點與時間" },
 ];
 
 export function VoiceAiSection() {
@@ -65,8 +65,8 @@ export function VoiceAiSection() {
           <span className="text-taxi-yellow">像真人一樣</span>
         </h2>
         <p className="mt-5 text-lg md:text-xl leading-relaxed text-sand-200">
-          打電話進來，AI 馬上接、聽得懂你說的話，忙不過來還會自動轉真人。
-          <span className="font-bold text-sand-50">不用學 App、不用等接線，秒接不漏接。</span>
+          打電話進來，由 AI 接聽、聽得懂你說的話，忙不過來還會自動轉真人。
+          <span className="font-bold text-sand-50">不用先下載 App，直接說明接送需求。</span>
         </p>
       </div>
 

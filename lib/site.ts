@@ -20,8 +20,8 @@ export const site = {
   name: "GoGoCha 花蓮計程車",
   shortName: "GoGoCha",
   description:
-    "花蓮在地 24h 計程車隊，打電話 AI 像真人接聽、聽得懂台語，跳表車資依花蓮縣政府公告、長輩友善。叫車三秒撥通。",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://hualientaxi.taxi",
+    "GoGoCha 花蓮計程車提供電話、LINE 與 Android App 叫車。請提供上車地點、目的地、時間、人數與行李，派車依地點及當時車況確認。",
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://hualientaxi.taxi").replace(/\/$/, ""),
   apiBase:
     process.env.NEXT_PUBLIC_API_BASE ?? "https://api.hualientaxi.taxi",
   // 正規來源：E.164 國際格式，給 JSON-LD/schema、llms.txt 等機器讀取用（Google 建議格式）
@@ -32,7 +32,6 @@ export const site = {
   playStoreUrl:
     process.env.NEXT_PUBLIC_PLAY_STORE_URL ??
     "https://play.google.com/store/apps/details?id=com.hualien.taxidriver",
-  iosWaitlistUrl: process.env.NEXT_PUBLIC_IOS_WAITLIST_URL ?? "/ios-waitlist",
   lineOAUrl:
     process.env.NEXT_PUBLIC_LINE_OA_URL ?? "https://line.me/R/ti/p/@948rysbt",
   lineOAId: "@948rysbt",
@@ -40,18 +39,6 @@ export const site = {
   locale: "zh-TW",
 } as const;
 
-/**
- * 品牌統計數字 — 部署前替換為真實數據（用戶提供）。
- * 顯示時用 `<StatPill>`。
- */
-export const stats = {
-  totalTrips: "5,000+",
-  rating: "4.9",
-  reviewCount: "120+",
-  driverCount: "30+",
-  yearsOperating: "10+",
-  coverageTowns: 13,
-} as const;
 
 /**
  * 服務區域 — 花蓮縣 13 鄉鎮市與熱門接送地標。
@@ -86,6 +73,4 @@ export const serviceArea = {
     "光復糖廠",
     "六十石山",
   ],
-  // 花蓮市中心公開座標，作為 SAB 服務範圍中心點（非門牌地址）
-  center: { latitude: 23.9871, longitude: 121.6015 },
 } as const;

@@ -9,7 +9,7 @@ const CHANNELS = [
   {
     type: "phone",
     title: "電話叫車",
-    headline: "最直接，AI 秒接",
+    headline: "直接撥打，AI 接聽",
     desc: "不會用 App 沒關係。撥進來 AI 像真人接、聽得懂國台語，說出地點就好，忙線自動轉真人。24h 在地客服待命。",
     ctaLabel: "立即撥打",
     audience: "適合所有人（長輩最愛）",

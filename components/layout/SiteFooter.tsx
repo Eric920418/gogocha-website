@@ -12,7 +12,7 @@ const COLUMNS = [
       { href: "/passenger", label: "乘客叫車" },
       { href: "/driver", label: "司機招募" },
       { href: "/pricing", label: "透明車資" },
-      { href: "/routes", label: "熱門路線車資" },
+      { href: "/routes", label: "熱門接送路線" },
       { href: "/contact?type=business", label: "B2B 合作" },
     ],
   },

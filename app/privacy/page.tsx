@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/lib/seo/jsonld";
+import { pageMetadata } from "@/lib/seo/pages";
 import { Section } from "@/components/layout/Section";
 import { BrandBadge } from "@/components/brand/BrandBadge";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "隱私政策｜花蓮計程車 GoGoCha",
-  description: `${site.shortName} 隱私政策：說明我們蒐集、使用、保護您個人資料的方式。`,
-  alternates: { canonical: "/privacy" },
-};
+export const metadata = pageMetadata("/privacy");
 
 const SECTIONS = [
   {
@@ -91,6 +89,7 @@ function renderBold(text: string): React.ReactNode {
 export default function PrivacyPage() {
   return (
     <>
+      <JsonLd data={buildBreadcrumbJsonLd([{ name: "首頁", path: "/" }, { name: "隱私政策", path: "/privacy" }])} />
       <Section className="bg-sand-50 pt-16 md:pt-24 pb-8">
         <div className="max-w-3xl">
           <BrandBadge variant="ink" className="mb-4">

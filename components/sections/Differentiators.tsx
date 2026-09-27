@@ -5,13 +5,13 @@ import { Zap, ScrollText, PhoneCall } from "lucide-react";
 const POINTS = [
   {
     icon: Zap,
-    title: "三秒撥通・全年無休",
-    desc: "24 小時在地調度，不是平台轉介，半夜也有車。颱風天、過年、清晨班機接送都不打烊。",
+    title: "電話預約・在地調度",
+    desc: "夜間、連假與清晨班機接送請提前詢問；派車依天候、路況與當時車輛安排確認。",
   },
   {
     icon: ScrollText,
     title: "跳表車資・政府公告",
-    desc: "費率對齊花蓮縣政府公告，無平台加成、無夜間漫天喊價。所有費率公開可試算。",
+    desc: "費率對齊花蓮縣政府公告，無平台加成、無夜間漫天喊價。可查閱官方費率與收費說明。",
   },
   {
     icon: PhoneCall,
@@ -28,7 +28,7 @@ export function Differentiators() {
           為什麼選 GoGoCha
         </p>
         <h2 className="text-3xl md:text-5xl font-black text-ink-900 leading-tight">
-          別家做不到的三件事
+          叫車前，了解我們的服務
         </h2>
       </div>
 

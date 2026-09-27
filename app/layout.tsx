@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   buildOrganizationJsonLd,
-  buildLocalBusinessJsonLd,
+  buildTaxiServiceJsonLd,
 } from "@/lib/seo/jsonld";
 import "./globals.css";
 
@@ -48,12 +48,8 @@ export const metadata: Metadata = {
     title: site.name,
     description: site.description,
   },
-  alternates: {
-    canonical: site.url,
-  },
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -77,7 +73,7 @@ export default function RootLayout({
     >
       <body className="bg-sand-50 text-ink-900 min-h-full flex flex-col">
         <JsonLd data={buildOrganizationJsonLd()} />
-        <JsonLd data={buildLocalBusinessJsonLd()} />
+        <JsonLd data={buildTaxiServiceJsonLd()} />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
